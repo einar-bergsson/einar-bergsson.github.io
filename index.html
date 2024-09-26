@@ -52,7 +52,24 @@
                 success: async function (response) {
                   //set the token
                   token = response.token;
-                  alert("Token: " + token);
+                  //alert("Token: " + token);
+
+                  $.ajax({
+                      method: "GET",
+                      url: 'https://51.137.157.71/box.php',
+                      data: {tok: token, fex: myFext, aut: myAuthCode},
+                      crossDomain: true,
+                      cache: false,
+                      success: function (obj, textstatus) {
+                        if( !('error' in obj) ) {
+                          yourVariable = obj.result;
+                        }
+                        else {
+                          console.log(obj.error);
+                        }
+                  }
+                });
+     
                   try {
                       //Create a Box client using the token
                       client = new BoxClient({auth: new BoxDeveloperTokenAuth({token }),
@@ -69,10 +86,10 @@
             var myAuthCode = params.get('authCode');
             var myFext = params.get('fext');
             var myBoxUrl = params.get('boxurl');
-            alert("ID: " + id);
-            alert("AuthCode: " + myAuthCode);
-            alert("File ext: " + myFext);
-            alert("Box URL: " + myBoxUrl);
+            //alert("ID: " + id);
+            //alert("AuthCode: " + myAuthCode);
+            //alert("File ext: " + myFext);
+            //alert("Box URL: " + myBoxUrl);
             $("#TopLevel").attr("id",id);
             //Generates a PDF from specified HTML DOM Element
             $("#pdfgen").click( function() {
