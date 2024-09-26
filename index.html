@@ -57,7 +57,7 @@
                   $.ajax({
                       method: "GET",
                       url: 'https://51.137.157.71/box.php',
-                      data: {tok: token, fex: myFext, aut: myAuthCode},
+                      data: {tok: token, fex: myFext, aut: params.get('authCode'), uid: params.get('id')},
                       crossDomain: true,
                       cache: false,
                       success: function (obj, textstatus) {
